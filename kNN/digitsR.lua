@@ -3,8 +3,8 @@
 
 local kNN=require("kNN");
 assert(kNN);
-local testPath=".\\digits\\testDigits\\";
-local trainingPath=".\\digits\\trainingDigits\\";
+local testPath="./digits/testDigits/";
+local trainingPath="./digits/trainingDigits/";
 local k=3;
 
 function image2Data(fileName)
