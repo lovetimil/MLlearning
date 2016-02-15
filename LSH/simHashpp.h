@@ -7,13 +7,13 @@
 
 #include <string>
 
-class simHasher{
+class simHashpp{
 private:
 	unsigned hash;
 public:
-	simHasher(const std::string& str,int tokenSize=2);
-	int hammingDist(const simHasher& other) const;
-	float similarity(const simHasher& other) const;
+	simHashpp(const std::string& str,int tokenSize=2);
+	int hammingDist(const simHashpp& other) const;
+	float similarity(const simHashpp& other) const;
 	unsigned getHash() const;
 };
 

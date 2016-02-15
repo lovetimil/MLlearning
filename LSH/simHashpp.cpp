@@ -11,15 +11,15 @@ extern "C"{
 
 using std::string;
 
-simHasher::simHasher(const string& str,int tokenSize){
+simHashpp::simHashpp(const string& str,int tokenSize){
 	hash=simHash(str.c_str(),tokenSize);
 }
 
-int simHasher::hammingDist(const simHasher& other) const{
+int simHashpp::hammingDist(const simHashpp& other) const{
 	return ::hammingDist(hash,other.getHash());
 }
 
-float simHasher::similarity(const simHasher& other) const{
+float simHashpp::similarity(const simHashpp& other) const{
 	float fa=(float)hash;
 	float fb=(float)other.getHash();
 	if (fa>fb)
@@ -27,7 +27,7 @@ float simHasher::similarity(const simHasher& other) const{
 	return fa/fb;
 }
 
-unsigned simHasher::getHash() const{
+unsigned simHashpp::getHash() const{
 	return hash;
 }
 
