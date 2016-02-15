@@ -23,7 +23,7 @@ unsigned int simHash(const char* str,int tokenSize){
 	memset(ret,0,sizeof(ret));
 	for (;i<len;i+=tokenSize){
 		memcpy(strBuf,str+i,tokenSize);
-		*(strBuf+i+tokenSize)='\0';
+		*(strBuf+tokenSize)='\0';
 		unsigned int tokenHash=BKDRHash(strBuf);
 		for (bitMask=0;bitMask<hashSize;++bitMask)
 			if (tokenHash&(1<<bitMask))
@@ -45,8 +45,8 @@ unsigned int simHash_tokens(const char** tokens,int amount){
 		unsigned int tokenHash=BKDRHash(tokens[i]);
 		for (bitMask=0;bitMask<hashSize;++bitMask)
 			if (tokenHash&(1<<bitMask))
-				ret[bitMask]++;
-			else ret[bitMask]--;
+				ret[bitMask]+=strlen(tokens[i]);
+			else ret[bitMask]-=strlen(tokens[i]);
 	}
 	unsigned int retNum=0;
 	for (i=0;i<hashSize;++i)
