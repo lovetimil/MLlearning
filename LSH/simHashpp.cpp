@@ -30,3 +30,4 @@ float simHasher::similarity(const simHasher& other) const{
 unsigned simHasher::getHash() const{
 	return hash;
 }
+

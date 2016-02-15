@@ -16,3 +16,4 @@ public:
 	float similarity(const simHasher& other) const;
 	unsigned getHash() const;
 };
+
