@@ -19,3 +19,4 @@ int main(void){
 	cout<<fixed<<"similarity of s1 and s2: "<<sh1.similarity(s2)<<endl;
 	return 0;
 }
+

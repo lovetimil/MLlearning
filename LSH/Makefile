@@ -1,10 +1,10 @@
 # Makefile for LSH
 
 CXX=g++
-CXXFLAGS=-Wall -O2
+CXXFLAGS+=-Wall -O2
 
 CC=gcc
-CCFLAGS=-Wall -O2
+CCFLAGS+=-Wall -O2
 
 targets=simHash.o simHashpp.o
 
@@ -13,8 +13,7 @@ targets=simHash.o simHashpp.o
 
 all:test
 test:${targets} testSimHash.o
-	${CXX} ${targets} testSimHash.o -o test
-	strip test
+	${CXX} ${CXXFLAGS} ${targets} testSimHash.o -o test
 
 %.o:%.cpp
 	${CXX} -c ${CXXFLAGS} $< -o $@
@@ -23,7 +22,7 @@ test:${targets} testSimHash.o
 	${CC} -c ${CCFLAGS} $< -o $@
 
 clean:
-	rm -f ${targets} testSimHash.o test
+	rm -f ${targets} testSimHash.o test.* test
 
 simHash.o:simHash.h
 simHashpp.o:simHash.h simHashpp.h
