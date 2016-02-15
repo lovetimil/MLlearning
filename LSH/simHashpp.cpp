@@ -4,15 +4,25 @@
 */
 
 #include <string>
+#include <vector>
 extern "C"{
 #include "simHash.h"
 }
 #include "simHashpp.h"
 
 using std::string;
+using std::vector;
 
 simHashpp::simHashpp(const string& str,int tokenSize){
 	hash=simHash(str.c_str(),tokenSize);
+}
+
+simHashpp::simHashpp(const vector<string>& tokens){
+	const char** tokenPtr=new const char*[tokens.size()];
+	for (unsigned i=0;i<tokens.size();++i)
+		tokenPtr[i]=tokens[i].c_str();
+	hash=simHash_tokens(tokenPtr,tokens.size());
+	delete[] tokenPtr;
 }
 
 int simHashpp::hammingDist(const simHashpp& other) const{

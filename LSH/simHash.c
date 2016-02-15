@@ -38,6 +38,23 @@ unsigned int simHash(const char* str,int tokenSize){
 	return retNum;
 }
 
+unsigned int simHash_tokens(const char** tokens,int amount){
+	int ret[hashSize],bitMask,i;
+	memset(ret,0,sizeof(ret));
+	for (i=0;i<amount;++i){
+		unsigned int tokenHash=BKDRHash(tokens[i]);
+		for (bitMask=0;bitMask<hashSize;++bitMask)
+			if (tokenHash&(1<<bitMask))
+				ret[bitMask]++;
+			else ret[bitMask]--;
+	}
+	unsigned int retNum=0;
+	for (i=0;i<hashSize;++i)
+		if (ret[i]>0)
+			retNum+=1<<i;
+	return retNum;
+}
+
 int hammingDist(unsigned int a,unsigned int b){
 	unsigned x=a^b;
 	int ret=0;
