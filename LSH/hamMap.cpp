@@ -7,13 +7,14 @@
 #include <string>
 #include <stdexcept>
 #include <algorithm>
+#include <unordered_set>
 #include "hamMap.h"
 
 std::vector<unsigned> hamMap::split(unsigned toSplit){
 	std::vector<unsigned> ret;
 	for (int i=0;i<hashSize;){
 		int tmp=0;
-		for (int j=0;j<perSeg;++i)
+		for (int j=0;j<perSeg;++j,++i)
 			tmp+=toSplit&(1<<i);
 		ret.push_back(tmp);
 	}
@@ -47,15 +48,17 @@ int hamMap::count(unsigned sh){
 }
 
 std::vector<std::string> hamMap::find(unsigned sh){
-	std::vector<std::string> ret;
+	std::unordered_set<std::string> ret;
 	auto vct=split(sh);
 	for (unsigned x:vct){
 		auto range=D.equal_range(x);
 		for (auto it=range.first;it!=range.second;++it)
-			if (hammingDist(it->second,sh)<=maxHamDist_)
-				ret.push_back(M[it->second]);
+			if (hammingDist(it->second,sh)<=maxHamDist_){
+				auto range=M.equal_range(it->second);
+				for (auto it=range.first;it!=range.second;++it)
+					ret.insert(it->second);
+			}
 	}
-	std::sort(ret.begin(),ret.end());
-	return std::vector<std::string>(ret.begin(),
-									std::unique(ret.begin(),ret.end()));
+	return std::vector<std::string>(ret.begin(),ret.end());
 }
+
