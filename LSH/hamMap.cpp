@@ -25,7 +25,8 @@ hamMap::hamMap(int maxHamDist){
 	if (hashSize%(maxHamDist+1))
 		throw std::invalid_argument("Invalid maxHamDist");
 	maxHamDist_=maxHamDist;
-	perSeg=hashSize/(maxHamDist+1),segAmount=maxHamDist+1;
+	perSeg=hashSize/(maxHamDist+1);
+	segAmount=maxHamDist+1;
 }
 
 void hamMap::insert(const KV& kv){
