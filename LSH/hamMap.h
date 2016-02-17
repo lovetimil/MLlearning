@@ -30,4 +30,3 @@ public:
 	std::vector<std::string> find(unsigned sh);
 	std::vector<std::string> find(const std::string& k);
 };
-
