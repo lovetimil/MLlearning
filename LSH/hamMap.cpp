@@ -5,10 +5,27 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
 #include <stdexcept>
 #include <algorithm>
 #include <unordered_set>
 #include "hamMap.h"
+#include "simHashpp.h"
+
+static void splitStringBySpace(const std::string& str,
+							   std::vector<std::string>& dst){
+	std::istringstream ss(str);
+	std::string tmp;
+	while (ss>>tmp)
+		dst.push_back(tmp);
+}
+
+static unsigned getHashBystring(const std::string& str){
+	std::vector<std::string> tmp;
+	splitStringBySpace(str,tmp);
+	simHashpp hasher(tmp);
+	return hasher.getHash();
+}
 
 std::vector<unsigned> hamMap::split(unsigned toSplit){
 	std::vector<unsigned> ret;
@@ -36,6 +53,10 @@ void hamMap::insert(const KV& kv){
 		D.insert(std::make_pair(x,kv.first));
 }
 
+void hamMap::insert(const std::string& k){
+	insert(std::make_pair(getHashBystring(k),k));
+}
+
 int hamMap::count(unsigned sh){
 	int cnt=0;
 	auto vct=split(sh);
@@ -46,6 +67,10 @@ int hamMap::count(unsigned sh){
 				cnt++;
 	}
 	return cnt;
+}
+
+int hamMap::count(const std::string& k){
+	return count(getHashBystring(k));
 }
 
 std::vector<std::string> hamMap::find(unsigned sh){
@@ -61,5 +86,9 @@ std::vector<std::string> hamMap::find(unsigned sh){
 			}
 	}
 	return std::vector<std::string>(ret.begin(),ret.end());
+}
+
+std::vector<std::string> hamMap::find(const std::string& k){
+	return find(getHashBystring(k));
 }
 

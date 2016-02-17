@@ -20,17 +20,11 @@ int main(int argc,char* argv[]){
 	hamMap M;
 	int t=0;
 	while (t++,getline(stm,x)){
-		istringstream stmSs(x);
-		string x1;
-		vector<string> tkns;
-		while (stmSs>>x1)
-			tkns.push_back(x1);
-		simHashpp hasher(tkns);
-		auto v=M.find(hasher.getHash());
+		auto v=M.find(x);
 		cout<<"similar to ["<<t<<"]("<<x<<"):"<<endl<<"\t";
 		copy(v.begin(),v.end(),ostream_iterator<string>(cout,"\n\t"));
 		cout<<"("<<v.size()<<" counts)"<<endl;
-		M.insert(make_pair(hasher.getHash(),x));
+		M.insert(x);
 	}
 	return 0;
 }

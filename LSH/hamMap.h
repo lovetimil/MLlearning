@@ -24,7 +24,10 @@ public:
 	typedef std::pair<unsigned,std::string> KV;
 	explicit hamMap(int maxHamDist=3); //make sure (maxHamDist+1)|hashSize
 	void insert(const KV& kv);
+	void insert(const std::string& k);
 	int count(unsigned sh);
+	int count(const std::string& k);
 	std::vector<std::string> find(unsigned sh);
+	std::vector<std::string> find(const std::string& k);
 };
 
