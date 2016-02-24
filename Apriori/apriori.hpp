@@ -23,7 +23,7 @@ private:
 	const dataMap& dMap,retMap& toWrite,vctIter last);
 public:
 	apriori(const dataMap& dMap,double minSupport);
-	retMap getResult(){ return ret; }
+	const retMap& getResult(){ return ret; }
 };
 
 #include "apriori.cpp"
