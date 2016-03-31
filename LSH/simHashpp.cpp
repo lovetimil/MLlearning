@@ -13,9 +13,7 @@ extern "C"{
 using std::string;
 using std::vector;
 
-simHashpp::simHashpp(const string& str,int tokenSize){
-	hash=simHash(str.c_str(),tokenSize);
-}
+simHashpp::simHashpp(const string& str,int tokenSize){ hash=simHash(str.c_str(),tokenSize); }
 
 simHashpp::simHashpp(const vector<string>& tokens){
 	const char** tokenPtr=new const char*[tokens.size()];
@@ -25,9 +23,7 @@ simHashpp::simHashpp(const vector<string>& tokens){
 	delete[] tokenPtr;
 }
 
-int simHashpp::hammingDist(const simHashpp& other) const{
-	return ::hammingDist(hash,other.getHash());
-}
+int simHashpp::hammingDist(const simHashpp& other) const{ return ::hammingDist(hash,other.getHash()); }
 
 float simHashpp::similarity(const simHashpp& other) const{
 	float fa=(float)hash;
@@ -37,7 +33,4 @@ float simHashpp::similarity(const simHashpp& other) const{
 	return fa/fb;
 }
 
-unsigned simHashpp::getHash() const{
-	return hash;
-}
-
+unsigned simHashpp::getHash() const{ return hash; }
